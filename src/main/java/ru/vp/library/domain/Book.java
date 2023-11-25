@@ -36,4 +36,8 @@ public class Book {
     Boolean isAvailable;
 
     Integer price;
+
+    public void setId(String id) {
+        this.id = id;
+    }
 }
