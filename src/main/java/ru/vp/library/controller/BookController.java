@@ -1,15 +1,22 @@
 package ru.vp.library.controller;
 
-import java.util.List;
+import static ru.vp.library.constants.ThymeleafTemplateSystemNames.BOOK_ACTION_FORM;
+import static ru.vp.library.constants.ThymeleafTemplateSystemNames.BOOK_CREATION_FORM;
+import static ru.vp.library.constants.UrlNames.BOOK_URL;
+import static ru.vp.library.constants.UrlNames.CREATE_URL;
+import java.time.format.DateTimeParseException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ru.vp.library.domain.Book;
+import ru.vp.library.dto.BookDTO;
 import ru.vp.library.service.BookService;
 
 /**
@@ -19,8 +26,8 @@ import ru.vp.library.service.BookService;
  * @since 2023.11.24
  */
 
-@RestController
-@RequestMapping("/book")
+@Controller
+@RequestMapping(BOOK_URL)
 public class BookController {
 
     private final BookService bookService;
@@ -30,8 +37,27 @@ public class BookController {
     }
 
     @GetMapping
-    public List<Book> getAllBooks() {
-        return bookService.findAllBooks();
+    public String bookActions() {
+        return BOOK_ACTION_FORM;
+    }
+
+    @GetMapping(CREATE_URL)
+    public String showCreateBookForm(Model model) {
+        model.addAttribute("bookDTO", new BookDTO());
+        return BOOK_CREATION_FORM;
+    }
+
+    @PostMapping(CREATE_URL)
+    public String createBook(@ModelAttribute BookDTO bookDTO, RedirectAttributes redirectAttributes)
+        throws NumberFormatException, DateTimeParseException {
+        if (bookService.existsByIsbn(bookDTO.getIsbn())) {
+            redirectAttributes.addFlashAttribute("isbnIsExistMessage", "Книга с таким isbn уже добавлена.");
+        } else {
+            bookService.createBook(bookDTO);
+            redirectAttributes.addFlashAttribute("isbnIsExistMessage", "Книга успешно добавлена.");
+        }
+
+        return "redirect:" + BOOK_URL + CREATE_URL;
     }
 
     @GetMapping("/{id}")
@@ -39,11 +65,6 @@ public class BookController {
         return bookService.findBookById(id)
             .map(ResponseEntity::ok)
             .orElseGet(() -> ResponseEntity.notFound().build());
-    }
-
-    @PostMapping
-    public Book createBook(@RequestBody Book book) {
-        return bookService.saveBook(book);
     }
 
     @DeleteMapping("/{id}")

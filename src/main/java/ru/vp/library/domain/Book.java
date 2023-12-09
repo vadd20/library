@@ -3,6 +3,8 @@ package ru.vp.library.domain;
 import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Модель представления книги.
@@ -12,6 +14,8 @@ import javax.persistence.Id;
  */
 
 @Entity
+@Getter
+@Setter
 public class Book {
 
     @Id
@@ -36,8 +40,13 @@ public class Book {
     Boolean isAvailable;
 
     Integer price;
-
-    public void setId(String id) {
-        this.id = id;
-    }
 }
+
+
+
+
+
+
+
+
+

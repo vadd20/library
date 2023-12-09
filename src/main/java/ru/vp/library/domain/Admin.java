@@ -1,17 +1,14 @@
 package ru.vp.library.domain;
 
-import javax.persistence.Entity;
 import javax.persistence.Id;
 
 /**
- * Модель представления библиотекаря.
+ * todo vpodogov
  *
  * @author Vadim Podogov
- * @since 2023.11.18
+ * @since 2023.12.09
  */
-
-@Entity
-public class Librarian {
+public class Admin {
 
     @Id
     String id;
