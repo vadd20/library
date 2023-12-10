@@ -48,15 +48,9 @@ public class BookController {
     }
 
     @PostMapping(CREATE_URL)
-    public String createBook(@ModelAttribute BookDTO bookDTO, RedirectAttributes redirectAttributes)
-        throws NumberFormatException, DateTimeParseException {
-        if (bookService.existsByIsbn(bookDTO.getIsbn())) {
-            redirectAttributes.addFlashAttribute("isbnIsExistMessage", "Книга с таким isbn уже добавлена.");
-        } else {
-            bookService.createBook(bookDTO);
-            redirectAttributes.addFlashAttribute("isbnIsExistMessage", "Книга успешно добавлена.");
-        }
-
+    public String createBook(@ModelAttribute BookDTO bookDTO, RedirectAttributes redirectAttributes) {
+        bookService.createBook(bookDTO);
+        redirectAttributes.addFlashAttribute("bookCreationMessage", "Книга успешно добавлена.");
         return "redirect:" + BOOK_URL + CREATE_URL;
     }
 

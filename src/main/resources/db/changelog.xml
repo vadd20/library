@@ -6,4 +6,8 @@
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
     <include file="db/V01.00.00.20231029190000_init_schema.sql"/>
     <include file="db/V01.00.00.20231209230000__update_librarian_table_and_add_admin.sql"/>
+    <include file="db/V01.00.00.20231209235100__drop_librarian_admin_create_user_table.sql"/>
+    <include file="db/V01.00.00.20231210002000__add_role_column_to_user.sql"/>
+    <include file="db/V01.00.00.20231210003200__add_users.sql"/>
+    <include file="db/V01.00.00.20231210131500__drop_isbn_unique_constraint.sql"/>
 </databaseChangeLog>

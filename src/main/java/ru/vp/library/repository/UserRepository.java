@@ -1,7 +1,7 @@
 package ru.vp.library.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import ru.vp.library.domain.Librarian;
+import ru.vp.library.domain.User;
 
 /**
  * todo vpodogov
@@ -9,5 +9,8 @@ import ru.vp.library.domain.Librarian;
  * @author Vadim Podogov
  * @since 2023.11.24
  */
-public interface LibrarianRepository extends JpaRepository<Librarian, String> {
+
+public interface UserRepository extends JpaRepository<User, String> {
+
+    User findByLogin(String login);
 }
