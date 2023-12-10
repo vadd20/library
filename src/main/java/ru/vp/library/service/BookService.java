@@ -39,15 +39,10 @@ public class BookService {
         book.setPageCount(
             Integer.parseInt(bookDTO.getPageCount()));
         book.setLocation(bookDTO.getLocation());
-        book.setIsAvailable(
-            Boolean.parseBoolean(bookDTO.getIsAvailable()));
         book.setPrice(
             Integer.parseInt(bookDTO.getPrice()));
+        book.setIsDeleted(false);
         return bookRepository.save(book);
-    }
-
-    public Boolean existsByIsbn(String isbn) {
-        return bookRepository.existsByIsbn(isbn);
     }
 
     public List<Book> findAllBooks() {

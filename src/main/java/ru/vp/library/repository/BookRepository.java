@@ -10,5 +10,4 @@ import ru.vp.library.domain.Book;
  * @since 2023.11.24
  */
 public interface BookRepository extends JpaRepository<Book, String> {
-    Boolean existsByIsbn(String isbn);
 }

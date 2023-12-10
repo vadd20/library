@@ -10,4 +10,5 @@
     <include file="db/V01.00.00.20231210002000__add_role_column_to_user.sql"/>
     <include file="db/V01.00.00.20231210003200__add_users.sql"/>
     <include file="db/V01.00.00.20231210131500__drop_isbn_unique_constraint.sql"/>
+    <include file="db/V01.00.00.20231210151000__alter_book.sql"/>
 </databaseChangeLog>

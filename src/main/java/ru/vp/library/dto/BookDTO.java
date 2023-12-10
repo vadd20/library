@@ -20,6 +20,5 @@ public class BookDTO {
     private String publisher;
     private String pageCount;
     private String location;
-    private String isAvailable;
     private String price;
 }

@@ -37,9 +37,9 @@ public class Book {
 
     String location;
 
-    Boolean isAvailable;
-
     Integer price;
+
+    Boolean isDeleted;
 }
 
 
