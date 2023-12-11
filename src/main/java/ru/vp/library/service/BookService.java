@@ -3,7 +3,6 @@ package ru.vp.library.service;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 import org.springframework.stereotype.Service;
 import ru.vp.library.domain.Book;
 import ru.vp.library.dto.BookDTO;
@@ -28,7 +27,7 @@ public class BookService {
     public Book createBook(BookDTO bookDTO) {
         Book book = new Book();
         //BeanUtils.copyProperties(bookDTO, book);
-        book.setId(UUID.randomUUID().toString());
+        book.setId(bookDTO.getId());
         book.setIsbn(bookDTO.getIsbn());
         book.setTitle(bookDTO.getTitle());
         book.setAuthor(bookDTO.getAuthor());
@@ -36,13 +35,20 @@ public class BookService {
         book.setPublishedDate(
             LocalDate.parse(bookDTO.getPublishedDate()));
         book.setPublisher(bookDTO.getPublisher());
-        book.setPageCount(
-            Integer.parseInt(bookDTO.getPageCount()));
+        book.setPageCount(bookDTO.getPageCount());
         book.setLocation(bookDTO.getLocation());
-        book.setPrice(
-            Integer.parseInt(bookDTO.getPrice()));
+        book.setPrice(bookDTO.getPrice());
+        book.setTotalNumber(bookDTO.getTotalNumber());
         book.setIsDeleted(false);
         return bookRepository.save(book);
+    }
+
+    public Boolean existsByIsbn(String isbn) {
+        return bookRepository.existsByIsbn(isbn);
+    }
+
+    public Book findByIbsn(String isbn) {
+        return bookRepository.findByIsbn(isbn);
     }
 
     public List<Book> findAllBooks() {

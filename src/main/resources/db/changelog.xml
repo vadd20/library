@@ -11,4 +11,5 @@
     <include file="db/V01.00.00.20231210003200__add_users.sql"/>
     <include file="db/V01.00.00.20231210131500__drop_isbn_unique_constraint.sql"/>
     <include file="db/V01.00.00.20231210151000__alter_book.sql"/>
+    <include file="db/V01.00.00.20231210151000__alter_book_add_total_number_column.sql"/>
 </databaseChangeLog>

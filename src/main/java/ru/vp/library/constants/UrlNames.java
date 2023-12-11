@@ -13,5 +13,5 @@ public class UrlNames {
 
     public static final String CREATE_URL = "/create";
 
-
+    public static final String INSTANCE_URL = "/instance";
 }

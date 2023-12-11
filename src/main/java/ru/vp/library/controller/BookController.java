@@ -4,7 +4,9 @@ import static ru.vp.library.constants.ThymeleafTemplateSystemNames.BOOK_ACTION_F
 import static ru.vp.library.constants.ThymeleafTemplateSystemNames.BOOK_CREATION_FORM;
 import static ru.vp.library.constants.UrlNames.BOOK_URL;
 import static ru.vp.library.constants.UrlNames.CREATE_URL;
-import java.time.format.DateTimeParseException;
+import java.util.List;
+import java.util.UUID;
+import javax.transaction.Transactional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ru.vp.library.domain.Book;
 import ru.vp.library.dto.BookDTO;
+import ru.vp.library.service.BookInstanceService;
 import ru.vp.library.service.BookService;
 
 /**
@@ -31,9 +34,12 @@ import ru.vp.library.service.BookService;
 public class BookController {
 
     private final BookService bookService;
+    private final BookInstanceService bookInstanceService;
 
-    public BookController(BookService bookService) {
+    public BookController(BookService bookService,
+                          BookInstanceService bookInstanceService) {
         this.bookService = bookService;
+        this.bookInstanceService = bookInstanceService;
     }
 
     @GetMapping
@@ -48,9 +54,16 @@ public class BookController {
     }
 
     @PostMapping(CREATE_URL)
+    @Transactional
     public String createBook(@ModelAttribute BookDTO bookDTO, RedirectAttributes redirectAttributes) {
-        bookService.createBook(bookDTO);
-        redirectAttributes.addFlashAttribute("bookCreationMessage", "Книга успешно добавлена.");
+        if (bookService.existsByIsbn(bookDTO.getIsbn())) {
+            redirectAttributes.addFlashAttribute("bookCreationMessage", "Книга с таким isbn уже добавлена.");
+        } else {
+            bookDTO.setId(UUID.randomUUID().toString());
+            Book addedBook = bookService.createBook(bookDTO);
+            bookInstanceService.createBookInstances(addedBook, addedBook.getTotalNumber());
+            redirectAttributes.addFlashAttribute("bookCreationMessage", "Книга успешно добавлена.");
+        }
         return "redirect:" + BOOK_URL + CREATE_URL;
     }
 

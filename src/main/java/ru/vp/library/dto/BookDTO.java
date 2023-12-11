@@ -12,13 +12,15 @@ import lombok.Setter;
 @Getter
 @Setter
 public class BookDTO {
+    private String id;
     private String isbn;
     private String title;
     private String author;
     private String genre;
     private String publishedDate;
     private String publisher;
-    private String pageCount;
+    private int pageCount;
     private String location;
-    private String price;
+    private int price;
+    private int totalNumber;
 }
