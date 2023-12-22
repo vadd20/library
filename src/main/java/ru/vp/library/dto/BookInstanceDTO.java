@@ -1,30 +1,19 @@
 package ru.vp.library.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * todo vpodogov
  *
  * @author Vadim Podogov
  * @since 2023.12.10
  */
+@Getter
+@Setter
 public class BookInstanceDTO {
     private String isbn;
     private int numberOfInstances;
 
-    // Геттеры и сеттеры
-    public String getIsbn() {
-        return isbn;
-    }
-
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
-    }
-
-    public int getNumberOfInstances() {
-        return numberOfInstances;
-    }
-
-    public void setNumberOfInstances(int numberOfInstances) {
-        this.numberOfInstances = numberOfInstances;
-    }
 }
 

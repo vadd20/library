@@ -13,5 +13,7 @@ public interface BookRepository extends JpaRepository<Book, String> {
 
     Boolean existsByIsbn(String isbn);
 
+    String deleteBookByIsbn(String isbn);
+
     Book findByIsbn(String isbn);
 }

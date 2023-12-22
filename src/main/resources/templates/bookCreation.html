@@ -10,49 +10,49 @@
     <p th:text="${bookCreationMessage}"></p>
 </div>
 <form action="/book/create" method="post" th:object="${bookDTO}" class="container mt-3">
-    <div class="form-group">
+    <div class="form-group mb-3">
         <label for="isbn">ISBN:</label>
         <input type="text" id="isbn" name="isbn" th:field="*{isbn}" required class="form-control"/>
     </div>
-    <div class="form-group">
+    <div class="form-group mb-3">
         <label for="title">Название:</label>
         <input type="text" id="title" name="title" th:field="*{title}" required class="form-control"/>
     </div>
-    <div class="form-group">
+    <div class="form-group mb-3">
         <label for="author">Автор:</label>
         <input type="text" id="author" name="author" th:field="*{author}" required class="form-control"/>
     </div>
-    <div class="form-group">
+    <div class="form-group mb-3">
         <label for="genre">Жанр:</label>
         <input type="text" id="genre" name="genre" th:field="*{genre}" required class="form-control"/>
     </div>
-    <div class="form-group">
+    <div class="form-group mb-3">
         <label for="publishedDate">Дата издания:</label>
         <input type="text" id="publishedDate" name="publishedDate" th:field="*{publishedDate}" required class="form-control"/>
     </div>
-    <div class="form-group">
+    <div class="form-group mb-3">
         <label for="publisher">Издательство:</label>
         <input type="text" id="publisher" name="publisher" th:field="*{publisher}" required class="form-control"/>
     </div>
-    <div class="form-group">
+    <div class="form-group mb-3">
         <label for="pageCount">Количество страниц:</label>
         <input type="number" id="pageCount" name="pageCount" th:field="*{pageCount}" required min="1" class="form-control"/>
     </div>
-    <div class="form-group">
+    <div class="form-group mb-3">
         <label for="location">Местоположение:</label>
         <input type="text" id="location" name="location" th:field="*{location}" required class="form-control"/>
     </div>
-    <div class="form-group">
+    <div class="form-group mb-3">
         <label for="price">Цена:</label>
         <input type="number" id="price" name="price" th:field="*{price}" required min="1" class="form-control"/>
     </div>
-    <div class="form-group">
+    <div class="form-group mb-3">
         <label for="totalNumber">Количество экземпляров:</label>
         <input type="number" id="totalNumber" name="totalNumber" th:field="*{totalNumber}" required min="1" class="form-control"/>
     </div>
-    <br>
-    <div class="form-group">
-        <button type="submit" class="btn btn-primary">Создать</button>
+    <div class="form-group d-flex">
+        <button type="submit" class="btn btn-primary me-2">Создать</button>
+        <a href="/book" class="btn btn-secondary">Назад</a>
     </div>
 </form>
 </body>

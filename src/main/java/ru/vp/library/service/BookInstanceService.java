@@ -49,4 +49,16 @@ public class BookInstanceService {
         Integer maxNumber = bookInstanceRepository.findMaxNumberByIsbn(isbn);
         return (maxNumber != null) ? maxNumber : 0;
     }
+
+    public List<BookInstance> deleteAllByBookId(String bookId) {
+        return bookInstanceRepository.deleteAllByBookId(bookId);
+    }
+
+    public boolean existsById(String isbn) {
+        return bookInstanceRepository.existsById(isbn);
+    }
+
+    public String deleteBookInstanceById(String isbn) {
+        return bookInstanceRepository.deleteBookInstanceById(isbn);
+    }
 }

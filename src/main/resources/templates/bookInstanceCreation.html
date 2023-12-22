@@ -10,17 +10,17 @@
     <p th:text="${bookInstanceCreationMessage}"></p>
 </div>
 <form action="/book/instance/create" method="post" th:object="${bookInstanceDTO}" class="container mt-3">
-    <div class="form-group">
+    <div class="form-group mb-3">
         <label for="isbn">ISBN:</label>
         <input type="text" id="isbn" name="isbn" required class="form-control"/>
     </div>
-    <div class="form-group">
+    <div class="form-group mb-3">
         <label for="numberOfInstances">Количество добавляемых экземпляров:</label>
         <input type="number" id="numberOfInstances" name="numberOfInstances" required min="1" class="form-control"/>
     </div>
-    <br>
-    <div class="form-group">
-        <button type="submit" class="btn btn-primary">Создать</button>
+    <div class="form-group d-flex">
+        <button type="submit" class="btn btn-primary me-2">Создать</button>
+        <a href="/book" class="btn btn-secondary">Назад</a>
     </div>
 </form>
 </body>

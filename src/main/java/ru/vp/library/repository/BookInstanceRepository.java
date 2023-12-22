@@ -1,5 +1,6 @@
 package ru.vp.library.repository;
 
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import ru.vp.library.domain.BookInstance;
@@ -15,5 +16,9 @@ public interface BookInstanceRepository extends JpaRepository<BookInstance, Stri
     @Query(value = "SELECT MAX(CAST(SPLIT_PART(id, '_', 2) AS INTEGER)) FROM book_instance WHERE id LIKE CONCAT(?1, '_%')", nativeQuery = true)
     Integer findMaxNumberByIsbn(String isbn);
 
+    boolean existsById(String isbn);
 
+    String deleteBookInstanceById(String isbn);
+
+    List<BookInstance> deleteAllByBookId(String bookId);
 }

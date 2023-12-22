@@ -2,23 +2,22 @@ package ru.vp.library.controller;
 
 import static ru.vp.library.constants.ThymeleafTemplateSystemNames.BOOK_ACTION_FORM;
 import static ru.vp.library.constants.ThymeleafTemplateSystemNames.BOOK_CREATION_FORM;
+import static ru.vp.library.constants.ThymeleafTemplateSystemNames.BOOK_DELETE_FORM;
 import static ru.vp.library.constants.UrlNames.BOOK_URL;
 import static ru.vp.library.constants.UrlNames.CREATE_URL;
-import java.util.List;
+import static ru.vp.library.constants.UrlNames.DELETE_URL;
 import java.util.UUID;
 import javax.transaction.Transactional;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ru.vp.library.domain.Book;
 import ru.vp.library.dto.BookDTO;
+import ru.vp.library.dto.DeleteBookOrInstanceForm;
 import ru.vp.library.service.BookInstanceService;
 import ru.vp.library.service.BookService;
 
@@ -53,6 +52,18 @@ public class BookController {
         return BOOK_CREATION_FORM;
     }
 
+    @GetMapping(DELETE_URL)
+    public String showDeleteBookForm() {
+        return BOOK_DELETE_FORM;
+    }
+
+    /**
+     * Добавление книги.
+     *
+     * @param bookDTO
+     * @param redirectAttributes
+     * @return
+     */
     @PostMapping(CREATE_URL)
     @Transactional
     public String createBook(@ModelAttribute BookDTO bookDTO, RedirectAttributes redirectAttributes) {
@@ -67,17 +78,19 @@ public class BookController {
         return "redirect:" + BOOK_URL + CREATE_URL;
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Book> getBookById(@PathVariable String id) {
-        return bookService.findBookById(id)
-            .map(ResponseEntity::ok)
-            .orElseGet(() -> ResponseEntity.notFound().build());
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteBook(@PathVariable String id) {
-        bookService.deleteBook(id);
-        return ResponseEntity.ok().build();
+    @PostMapping(DELETE_URL)
+    @Transactional
+    public String deleteBook(@ModelAttribute DeleteBookOrInstanceForm form, RedirectAttributes redirectAttributes) {
+        String isbn = form.getIsbn();
+        if (bookService.existsByIsbn(isbn)) {
+            Book book = bookService.findByIbsn(isbn);
+            bookInstanceService.deleteAllByBookId(book.getId());
+            bookService.deleteBookByIsbn(isbn);
+            redirectAttributes.addFlashAttribute("bookDeleteMessage",
+                "Книга " + book.getTitle() + " с isbn " + book.getIsbn() + " успешно удалена.");
+        } else {
+            redirectAttributes.addFlashAttribute("bookDeleteMessage", "Книги с таким isbn не существует.");
+        }
+        return "redirect:" + BOOK_URL + DELETE_URL;
     }
 }
-

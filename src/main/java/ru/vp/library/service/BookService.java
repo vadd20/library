@@ -59,8 +59,8 @@ public class BookService {
         return bookRepository.findById(id);
     }
 
-    public void deleteBook(String id) {
-        bookRepository.deleteById(id);
+    public String deleteBookByIsbn(String isbn) {
+        return bookRepository.deleteBookByIsbn(isbn);
     }
 
     // Дополнительные методы по необходимости
