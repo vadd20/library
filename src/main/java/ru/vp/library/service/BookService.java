@@ -2,10 +2,10 @@ package ru.vp.library.service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 import org.springframework.stereotype.Service;
 import ru.vp.library.domain.Book;
 import ru.vp.library.dto.BookDTO;
+import ru.vp.library.dto.BookFilterDTO;
 import ru.vp.library.repository.BookRepository;
 
 /**
@@ -51,18 +51,25 @@ public class BookService {
         return bookRepository.findByIsbn(isbn);
     }
 
+
     public List<Book> findAllBooks() {
         return bookRepository.findAll();
-    }
-
-    public Optional<Book> findBookById(String id) {
-        return bookRepository.findById(id);
     }
 
     public String deleteBookByIsbn(String isbn) {
         return bookRepository.deleteBookByIsbn(isbn);
     }
 
-    // Дополнительные методы по необходимости
+    public List<Book> findBooksByFilter(BookFilterDTO filter) {
+        return bookRepository.findBooksByFilter(
+            filter.getIsbn(),
+            filter.getTitle(),
+            filter.getAuthor(),
+            filter.getGenre(),
+            filter.getPublisher(),
+            filter.getPageCount(),
+            filter.getPrice()
+        );
+    }
 }
 

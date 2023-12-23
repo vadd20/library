@@ -3,9 +3,12 @@ package ru.vp.library.controller;
 import static ru.vp.library.constants.ThymeleafTemplateSystemNames.BOOK_ACTION_FORM;
 import static ru.vp.library.constants.ThymeleafTemplateSystemNames.BOOK_CREATION_FORM;
 import static ru.vp.library.constants.ThymeleafTemplateSystemNames.BOOK_DELETE_FORM;
+import static ru.vp.library.constants.ThymeleafTemplateSystemNames.BOOK_LIST_FORM;
 import static ru.vp.library.constants.UrlNames.BOOK_URL;
 import static ru.vp.library.constants.UrlNames.CREATE_URL;
 import static ru.vp.library.constants.UrlNames.DELETE_URL;
+import static ru.vp.library.constants.UrlNames.SHOW_URL;
+import java.util.List;
 import java.util.UUID;
 import javax.transaction.Transactional;
 import org.springframework.stereotype.Controller;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ru.vp.library.domain.Book;
 import ru.vp.library.dto.BookDTO;
+import ru.vp.library.dto.BookFilterDTO;
 import ru.vp.library.dto.DeleteBookOrInstanceForm;
 import ru.vp.library.service.BookInstanceService;
 import ru.vp.library.service.BookService;
@@ -78,6 +82,12 @@ public class BookController {
         return "redirect:" + BOOK_URL + CREATE_URL;
     }
 
+    /**
+     * Удаление книги.
+     * @param form
+     * @param redirectAttributes
+     * @return
+     */
     @PostMapping(DELETE_URL)
     @Transactional
     public String deleteBook(@ModelAttribute DeleteBookOrInstanceForm form, RedirectAttributes redirectAttributes) {
@@ -92,5 +102,18 @@ public class BookController {
             redirectAttributes.addFlashAttribute("bookDeleteMessage", "Книги с таким isbn не существует.");
         }
         return "redirect:" + BOOK_URL + DELETE_URL;
+    }
+
+    @GetMapping(SHOW_URL)
+    public String listBooks(@ModelAttribute("filter") BookFilterDTO filter, Model model) {
+        List<Book> books;
+        if (filter.isFilterSet()) {
+            books = bookService.findBooksByFilter(filter); // Поиск книг по фильтру
+        } else {
+            books = bookService.findAllBooks();
+        }
+        model.addAttribute("books", books);
+        model.addAttribute("filter", filter);
+        return BOOK_LIST_FORM;
     }
 }

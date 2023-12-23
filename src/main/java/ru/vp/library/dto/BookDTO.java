@@ -1,5 +1,6 @@
 package ru.vp.library.dto;
 
+import java.time.LocalDate;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,4 +24,6 @@ public class BookDTO {
     private String location;
     private int price;
     private int totalNumber;
+    private Boolean isDeleted;
+    private int totalAvailableNumber;
 }

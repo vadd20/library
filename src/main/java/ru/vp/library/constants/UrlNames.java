@@ -10,9 +10,13 @@ public class UrlNames {
 
     public static final String BOOK_URL = "/book";
 
+    public static final String ISSUE_URL = "/issue";
+
     public static final String CREATE_URL = "/create";
 
     public static final String DELETE_URL = "/delete";
 
     public static final String INSTANCE_URL = "/instance";
+
+    public static final String SHOW_URL = "/show";
 }

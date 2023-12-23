@@ -17,4 +17,6 @@ public class ThymeleafTemplateSystemNames {
     public static final String BOOK_DELETE_FORM = "bookRemoving";
 
     public static final String BOOK_INSTANCE_DELETE_FORM = "bookInstanceRemoving";
+
+    public static final String BOOK_LIST_FORM = "bookList";
 }
