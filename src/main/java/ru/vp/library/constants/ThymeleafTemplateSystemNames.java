@@ -29,4 +29,12 @@ public class ThymeleafTemplateSystemNames {
     public static final String BOOK_LIST_FORM = "bookList";
 
     public static final String ISSUE_LIST_FORM = "issuanceList";
+
+    public static final String RESERVATION_ACTION_FORM = "reservationAction";
+
+    public static final String RESERVATION_CREATE_FORM = "reservationCreation";
+
+    public static final String RESERVATION_CHANGE_EXPIRE_DATE_FORM = "reservationChangeExpireDate";
+
+    public static final String RESERVATION_LIST_FORM = "reservationList";
 }

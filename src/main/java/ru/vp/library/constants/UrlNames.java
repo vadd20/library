@@ -14,6 +14,8 @@ public class UrlNames {
 
     public static final String ISSUE_URL = "/issue";
 
+    public static final String RESERVATION_URL = "/reservation";
+
     public static final String RETURN_URL = "/return";
 
     public static final String CREATE_URL = "/create";
@@ -24,5 +26,5 @@ public class UrlNames {
 
     public static final String SHOW_URL = "/show";
 
-    public static final String CHANGE_URL = "/change";
+    public static final String CHANGE_EXPIR_DATE_URL = "/changeExpirationDate";
 }

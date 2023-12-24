@@ -16,4 +16,7 @@
     <include file="db/V01.00.00.20231224112500__create_changing_total_number_after_removing_book_instance.sql"/>
     <include file="db/V01.00.00.20231224115900__create_trigger_insert_instance.sql"/>
     <include file="db/V01.00.00.20231224132300__alter_issue_table.sql"/>
+    <include file="db/V01.00.00.20231224210100__alter_book_table_drop_total_number.sql"/>
+    <include file="db/V01.00.00.20231224211100__alter_table_book_reservation.sql"/>
+    <include file="db/V01.00.00.20231225015200__alter_table_book_reserv_change_status_length.sql"/>
 </databaseChangeLog>

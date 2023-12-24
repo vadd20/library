@@ -21,7 +21,7 @@ public interface BookIssueRepository extends JpaRepository<BookIssue, String> {
     @Modifying
     @Query("update BookIssue issue set issue.isOverdue = true" +
         " where issue.dueDate < current_date and issue.isOverdue = false")
-    void updateFlagsOlderThanThoWeeks();
+    void updateOverdueStatus();
 
     boolean existsByBookInstanceId(String isbn);
 

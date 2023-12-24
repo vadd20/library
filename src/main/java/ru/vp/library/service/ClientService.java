@@ -24,6 +24,11 @@ public class ClientService {
     public Boolean existsByReaderTicketNumber(String readerTicketNumber) {
         return clientRepository.existsByReaderTicketNumber(readerTicketNumber);
     }
+
+    public Optional<Client> findByReaderTicketNumber(String readerTicketNumber) {
+        return clientRepository.findByReaderTicketNumber(readerTicketNumber);
+    }
+
     public List<Client> findAllClients() {
         return clientRepository.findAll();
     }
