@@ -11,8 +11,8 @@ spring:
 
   datasource:
     url: jdbc:postgresql://127.0.0.1:5432/library
-    username: library-user
-    password: libraryPassword
+    username: postgres
+    password: postgres
   liquibase:
     change-log: classpath:/db/changelog.xml
 logging:

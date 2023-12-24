@@ -1,0 +1,47 @@
+html, body {
+    height: 100%; /* Указываем высоту для HTML и BODY */
+    margin: 0; /* Убираем дефолтные отступы */
+    display: flex;
+    flex-direction: column;
+}
+
+body {
+    background-color: #f0f0f0; /* Серый фон */
+    font-family: Arial, sans-serif;
+    flex: 1;
+}
+
+.content { /* Контент, который должен тянуться */
+    flex: 1; /* Занимает всё доступное пространство */
+    display: flex; /* Также делаем его флекс-контейнером */
+    flex-direction: column; /* Элементы в колонку */
+    justify-content: flex-start; /* Содержимое начинается сверху */
+}
+
+.header, .footer {
+    background-color: #fff;
+    padding: 10px;
+    display: flex;
+    justify-content: center; /* Центрируем содержимое по горизонтали */
+    align-items: center; /* Центрируем содержимое по вертикали */
+}
+
+.header .library-name, .footer p {
+    flex-grow: 1; /* Позволяет заголовку и тексту в футере занимать доступное пространство */
+    text-align: center; /* Центрирует текст внутри элемента */
+}
+
+.header .logo, .header .countdown {
+    /* Если элементы слишком близки к центру, добавьте padding */
+    padding: 0 10px;
+}
+
+.footer {
+    margin-top: auto; /* Прижимаем футер к низу */
+    text-align: center;
+}
+
+.logo {
+    width: 100px; /* Или любой другой размер */
+    height: auto;
+}

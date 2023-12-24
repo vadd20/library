@@ -4,22 +4,37 @@
     <title>Удаление книги</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/style.css" rel="stylesheet">
 </head>
 <body>
+<div class="header">
+    <!-- Хедер -->
+    <div th:replace="header :: header"></div>
+</div>
+
 <div th:if="${bookDeleteMessage}" class="alert alert-warning" role="alert">
     <p th:text="${bookDeleteMessage}"></p>
 </div>
 <div class="container mt-3">
     <form action="/book/delete" method="post" th:object="${form}" class="mb-4">
-        <div class="form-group mb-3">
-            <label for="isbn">ISBN:</label>
-            <input type="text" id="isbn" name="isbn" required class="form-control"/>
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8 form-group mb-3">
+                <label for="isbn">ISBN:</label>
+                <input type="text" id="isbn" name="isbn" required class="form-control"/>
+            </div>
         </div>
-        <div class="form-group d-flex align-items-center">
-            <button type="submit" class="btn btn-primary me-2">Удалить</button>
-            <a href="/book" class="btn btn-secondary">Назад</a>
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8 form-group d-flex align-items-center">
+                <button type="submit" class="btn btn-primary me-2">Удалить</button>
+                <a href="/book" class="btn btn-secondary">Назад</a>
+            </div>
         </div>
     </form>
+</div>
+
+<div class="header">
+    <!-- Футер -->
+    <div th:replace="footer :: footer"></div>
 </div>
 
 </body>
