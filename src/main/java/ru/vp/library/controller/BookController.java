@@ -8,6 +8,8 @@ import static ru.vp.library.constants.UrlNames.BOOK_URL;
 import static ru.vp.library.constants.UrlNames.CREATE_URL;
 import static ru.vp.library.constants.UrlNames.DELETE_URL;
 import static ru.vp.library.constants.UrlNames.SHOW_URL;
+import java.io.ObjectInput;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 import javax.transaction.Transactional;
@@ -76,7 +78,7 @@ public class BookController {
         } else {
             bookDTO.setId(UUID.randomUUID().toString());
             Book addedBook = bookService.createBook(bookDTO);
-            bookInstanceService.createBookInstances(addedBook, addedBook.getTotalNumber());
+            bookInstanceService.createBookInstances(addedBook, bookDTO.getTotalNumber());
             redirectAttributes.addFlashAttribute("bookCreationMessage", "Книга успешно добавлена.");
         }
         return "redirect:" + BOOK_URL + CREATE_URL;
@@ -106,7 +108,7 @@ public class BookController {
 
     @GetMapping(SHOW_URL)
     public String listBooks(@ModelAttribute("filter") BookFilterDTO filter, Model model) {
-        List<Book> books;
+        List<BookDTO> books;
         if (filter.isFilterSet()) {
             books = bookService.findBooksByFilter(filter); // Поиск книг по фильтру
         } else {

@@ -28,11 +28,11 @@
     </div>
     <div class="form-group mb-3">
         <label for="publishedDate">Дата издания:</label>
-        <input type="text" id="publishedDate" name="publishedDate" th:field="*{publishedDate}" required class="form-control"/>
+        <input type="date" id="publishedDate" name="publishedDate" th:field="*{publishedDate}" required class="form-control"/>
     </div>
     <div class="form-group mb-3">
         <label for="publisher">Издательство:</label>
-        <input type="text" id="publisher" name="publisher" th:field="*{publisher}" required class="form-control"/>
+        <input type="data" id="publisher" name="publisher" th:field="*{publisher}" required class="form-control"/>
     </div>
     <div class="form-group mb-3">
         <label for="pageCount">Количество страниц:</label>
@@ -54,6 +54,7 @@
         <button type="submit" class="btn btn-primary me-2">Создать</button>
         <a href="/book" class="btn btn-secondary">Назад</a>
     </div>
+    <br>
 </form>
 </body>
 </html>

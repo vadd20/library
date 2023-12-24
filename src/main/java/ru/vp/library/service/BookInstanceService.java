@@ -2,6 +2,7 @@ package ru.vp.library.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.stereotype.Service;
 import ru.vp.library.domain.Book;
 import ru.vp.library.domain.BookInstance;
@@ -60,5 +61,9 @@ public class BookInstanceService {
 
     public String deleteBookInstanceById(String isbn) {
         return bookInstanceRepository.deleteBookInstanceById(isbn);
+    }
+
+    public Optional<BookInstance> findByIsbn(String isbn) {
+        return bookInstanceRepository.findById(isbn);
     }
 }

@@ -15,4 +15,7 @@ spring:
     password: libraryPassword
   liquibase:
     change-log: classpath:/db/changelog.xml
-
+logging:
+  level:
+    org.hibernate.SQL: DEBUG # Показывает SQL запросы
+    org.hibernate.type.descriptor.sql: TRACE

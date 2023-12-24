@@ -49,33 +49,41 @@
     <table class="table">
         <thead>
         <tr>
-            <th>ISBN</th>
-            <th>Название</th>
-            <th>Автор</th>
-            <th>Жанр</th>
-            <th>Дата издания</th>
-            <th>Издательство</th>
-            <th>Количество страниц</th>
-            <th>Местоположение</th>
-            <th>Цена</th>
-            <th>Количество экземпляров</th>
+            <th class="text-nowrap">ISBN</th>
+            <th class="text-nowrap">Название</th>
+            <th class="text-nowrap">Автор</th>
+            <th class="text-nowrap">Жанр</th>
+            <th class="text-nowrap">Дата издания</th>
+            <th class="text-nowrap">Издательство</th>
+            <th class="text-nowrap">Страниц</th>
+            <th class="text-nowrap">Местоположение</th>
+            <th class="text-nowrap">Цена</th>
+            <th>Всего экземпляров</th>
+            <th>Доступных экземпляров</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="book : ${books}">
-            <td th:text="${book.isbn}"></td>
-            <td th:text="${book.title}"></td>
-            <td th:text="${book.author}"></td>
-            <td th:text="${book.genre}"></td>
-            <td th:text="${book.publishedDate}"></td>
-            <td th:text="${book.publisher}"></td>
-            <td th:text="${book.pageCount}"></td>
-            <td th:text="${book.location}"></td>
-            <td th:text="${book.price}"></td>
-            <td th:text="${book.totalNumber}"></td>
+            <td class="text-nowrap" th:text="${book.isbn}"></td>
+            <td class="text-nowrap" th:text="${book.title}"></td>
+            <td class="text-nowrap" th:text="${book.author}"></td>
+            <td class="text-nowrap" th:text="${book.genre}"></td>
+            <td class="text-nowrap" th:text="${book.publishedDate}"></td>
+            <td class="text-nowrap" th:text="${book.publisher}"></td>
+            <td class="text-nowrap" th:text="${book.pageCount}"></td>
+            <td class="text-nowrap" th:text="${book.location}"></td>
+            <td class="text-nowrap" th:text="${book.price}"></td>
+            <td class="text-nowrap" th:text="${book.totalNumber}"></td>
+            <td class="text-nowrap" th:text="${book.totalAvailableNumber}"></td>
         </tr>
         </tbody>
     </table>
+
+    <br>
+    <div class="mt-4 d-grid gap-2">
+        <a href="/book" class="btn btn-secondary">Назад</a>
+    </div>
+    <br>
 </div>
 </body>
 </html>

@@ -1,10 +1,12 @@
 package ru.vp.library.repository;
 
 import java.util.List;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import ru.vp.library.domain.Book;
+import ru.vp.library.dto.BookDTO;
 
 /**
  * todo vpodogov
@@ -20,19 +22,30 @@ public interface BookRepository extends JpaRepository<Book, String> {
 
     Book findByIsbn(String isbn);
 
-    @Query(value = "SELECT b FROM Book b WHERE " +
-        "(:isbn IS NULL OR b.isbn LIKE :isbn) AND " +
-        "(:title IS NULL OR b.title LIKE :title) AND " +
-        "(:author IS NULL OR b.author LIKE :author) AND " +
-        "(:genre IS NULL OR b.genre LIKE :genre) AND " +
-        "(:publisher IS NULL OR b.publisher LIKE :publisher) AND " +
-        "(:pageCount IS NULL OR b.page_count = :pageCount) AND " +
-        "(:price IS NULL OR b.price = :price)", nativeQuery = true)
-    List<Book> findBooksByFilter(@Param("isbn") String isbn,
-                                 @Param("title") String title,
-                                 @Param("author") String author,
-                                 @Param("genre") String genre,
-                                 @Param("publisher") String publisher,
-                                 @Param("pageCount") Integer pageCount,
-                                 @Param("price") Integer price);
+    Optional<Book> findById(String id);
+
+    @Query("SELECT new ru.vp.library.dto.BookDTO(b.id, b.isbn, b.title, b.author, b.genre, b.publishedDate," +
+        " b.publisher, b.pageCount, b.location, b.price, b.totalNumber, COUNT(bi.id)) FROM Book b " +
+        "LEFT JOIN BookInstance bi ON b.id = bi.bookId AND bi.isAvailable = true " +
+        "WHERE (:isbn IS NULL OR b.isbn LIKE CONCAT('%', :isbn, '%')) AND " +
+        "(:title IS NULL OR b.title LIKE CONCAT('%', :title, '%')) AND " +
+        "(:author IS NULL OR b.author LIKE CONCAT('%', :author, '%')) AND " +
+        "(:genre IS NULL OR b.genre LIKE CONCAT('%', :genre, '%')) AND " +
+        "(:publisher IS NULL OR b.publisher LIKE CONCAT('%', :publisher, '%')) AND " +
+        "(:pageCount IS NULL OR b.pageCount = :pageCount) AND " +
+        "(:price IS NULL OR b.price = :price) " +
+        "GROUP BY b.id")
+    List<BookDTO> findBooksByFilter(@Param("isbn") String isbn,
+                                    @Param("title") String title,
+                                    @Param("author") String author,
+                                    @Param("genre") String genre,
+                                    @Param("publisher") String publisher,
+                                    @Param("pageCount") Integer pageCount,
+                                    @Param("price") Integer price);
+
+    @Query("SELECT new ru.vp.library.dto.BookDTO(b.id, b.isbn, b.title, b.author, b.genre, b.publishedDate," +
+        " b.publisher, b.pageCount, b.location, b.price, b.totalNumber, COUNT(bi.id)) FROM Book b " +
+        "LEFT JOIN BookInstance bi ON b.id = bi.bookId AND bi.isAvailable = true " +
+        "GROUP BY b.id")
+    List<BookDTO> findAllBooks();
 }

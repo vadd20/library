@@ -40,8 +40,6 @@ public class Book {
     Integer price;
 
     Integer totalNumber;
-
-    Boolean isDeleted;
 }
 
 

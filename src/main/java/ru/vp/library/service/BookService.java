@@ -1,7 +1,7 @@
 package ru.vp.library.service;
 
-import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.stereotype.Service;
 import ru.vp.library.domain.Book;
 import ru.vp.library.dto.BookDTO;
@@ -32,14 +32,12 @@ public class BookService {
         book.setTitle(bookDTO.getTitle());
         book.setAuthor(bookDTO.getAuthor());
         book.setGenre(bookDTO.getGenre());
-        book.setPublishedDate(
-            LocalDate.parse(bookDTO.getPublishedDate()));
+        book.setPublishedDate(bookDTO.getPublishedDate());
         book.setPublisher(bookDTO.getPublisher());
         book.setPageCount(bookDTO.getPageCount());
         book.setLocation(bookDTO.getLocation());
         book.setPrice(bookDTO.getPrice());
-        book.setTotalNumber(bookDTO.getTotalNumber());
-        book.setIsDeleted(false);
+        book.setTotalNumber(0);
         return bookRepository.save(book);
     }
 
@@ -51,16 +49,18 @@ public class BookService {
         return bookRepository.findByIsbn(isbn);
     }
 
-
-    public List<Book> findAllBooks() {
-        return bookRepository.findAll();
+    public Optional<Book> findById(String id) {
+        return bookRepository.findById(id);
+    }
+    public List<BookDTO> findAllBooks() {
+        return bookRepository.findAllBooks();
     }
 
     public String deleteBookByIsbn(String isbn) {
         return bookRepository.deleteBookByIsbn(isbn);
     }
 
-    public List<Book> findBooksByFilter(BookFilterDTO filter) {
+    public List<BookDTO> findBooksByFilter(BookFilterDTO filter) {
         return bookRepository.findBooksByFilter(
             filter.getIsbn(),
             filter.getTitle(),
