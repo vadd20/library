@@ -28,7 +28,7 @@ public class BookInstanceService {
      * @param numberOfInstances количество экземпляров
      * @return возвращает номера созданных экземпляров
      */
-    public List<Integer> createBookInstances(Book book, int numberOfInstances) {
+    public List<Integer> createBookInstances(Book book, long numberOfInstances) {
         List<Integer> instanceNumbers = new ArrayList<>();
         int maxNumber = getMaxNumberForIsbn(book.getIsbn());
         for (int i = maxNumber + 1; i < maxNumber + numberOfInstances + 1; i++) {

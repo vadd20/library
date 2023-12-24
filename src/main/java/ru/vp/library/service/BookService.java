@@ -37,7 +37,6 @@ public class BookService {
         book.setPageCount(bookDTO.getPageCount());
         book.setLocation(bookDTO.getLocation());
         book.setPrice(bookDTO.getPrice());
-        book.setTotalNumber(0);
         return bookRepository.save(book);
     }
 

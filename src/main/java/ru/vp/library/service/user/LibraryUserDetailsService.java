@@ -1,4 +1,4 @@
-package ru.vp.library.service;
+package ru.vp.library.service.user;
 
 import java.util.Collections;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import ru.vp.library.LibraryUserDetails;
 import ru.vp.library.domain.User;
 import ru.vp.library.repository.UserRepository;
 
@@ -31,7 +32,7 @@ public class LibraryUserDetailsService implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException("user not found");
         }
-        return new org.springframework.security.core.userdetails.User(user.getLogin(), user.getPassword(),
+        return new LibraryUserDetails(user.getId(), user.getLogin(), user.getPassword(),
             Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + user.getRole())));
     }
 }

@@ -31,6 +31,6 @@ public class BookDTO {
     private int pageCount;
     private String location;
     private int price;
-    private int totalNumber;
+    private long totalNumber;
     private long totalAvailableNumber;
 }

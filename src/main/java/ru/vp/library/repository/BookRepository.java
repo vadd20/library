@@ -24,17 +24,18 @@ public interface BookRepository extends JpaRepository<Book, String> {
 
     Optional<Book> findById(String id);
 
-    @Query("SELECT new ru.vp.library.dto.BookDTO(b.id, b.isbn, b.title, b.author, b.genre, b.publishedDate," +
-        " b.publisher, b.pageCount, b.location, b.price, b.totalNumber, COUNT(bi.id)) FROM Book b " +
-        "LEFT JOIN BookInstance bi ON b.id = bi.bookId AND bi.isAvailable = true " +
-        "WHERE (:isbn IS NULL OR b.isbn LIKE CONCAT('%', :isbn, '%')) AND " +
-        "(:title IS NULL OR b.title LIKE CONCAT('%', :title, '%')) AND " +
-        "(:author IS NULL OR b.author LIKE CONCAT('%', :author, '%')) AND " +
-        "(:genre IS NULL OR b.genre LIKE CONCAT('%', :genre, '%')) AND " +
-        "(:publisher IS NULL OR b.publisher LIKE CONCAT('%', :publisher, '%')) AND " +
-        "(:pageCount IS NULL OR b.pageCount = :pageCount) AND " +
-        "(:price IS NULL OR b.price = :price) " +
-        "GROUP BY b.id")
+    @Query(
+        "SELECT new ru.vp.library.dto.BookDTO(b.id, b.isbn, b.title, b.author, b.genre, b.publishedDate, b.publisher, " +
+            "b.pageCount, b.location, b.price, COUNT(bi.id), SUM(CASE WHEN bi.isAvailable = TRUE THEN 1 ELSE 0 END)) FROM Book b " +
+            "LEFT JOIN BookInstance bi ON b.id = bi.bookId " +
+            "WHERE (:isbn IS NULL OR b.isbn LIKE CONCAT('%', :isbn, '%')) AND " +
+            "(:title IS NULL OR b.title LIKE CONCAT('%', :title, '%')) AND " +
+            "(:author IS NULL OR b.author LIKE CONCAT('%', :author, '%')) AND " +
+            "(:genre IS NULL OR b.genre LIKE CONCAT('%', :genre, '%')) AND " +
+            "(:publisher IS NULL OR b.publisher LIKE CONCAT('%', :publisher, '%')) AND " +
+            "(:pageCount IS NULL OR b.pageCount = :pageCount) AND " +
+            "(:price IS NULL OR b.price = :price) " +
+            "GROUP BY b.id")
     List<BookDTO> findBooksByFilter(@Param("isbn") String isbn,
                                     @Param("title") String title,
                                     @Param("author") String author,
@@ -43,9 +44,10 @@ public interface BookRepository extends JpaRepository<Book, String> {
                                     @Param("pageCount") Integer pageCount,
                                     @Param("price") Integer price);
 
-    @Query("SELECT new ru.vp.library.dto.BookDTO(b.id, b.isbn, b.title, b.author, b.genre, b.publishedDate," +
-        " b.publisher, b.pageCount, b.location, b.price, b.totalNumber, COUNT(bi.id)) FROM Book b " +
-        "LEFT JOIN BookInstance bi ON b.id = bi.bookId AND bi.isAvailable = true " +
-        "GROUP BY b.id")
+    @Query(
+        "SELECT new ru.vp.library.dto.BookDTO(b.id, b.isbn, b.title, b.author, b.genre, b.publishedDate, b.publisher, " +
+            "b.pageCount, b.location, b.price, COUNT(bi.id), SUM(CASE WHEN bi.isAvailable = TRUE THEN 1 ELSE 0 END)) FROM Book b " +
+            "LEFT JOIN BookInstance bi ON b.id = bi.bookId " +
+            "GROUP BY b.id")
     List<BookDTO> findAllBooks();
 }

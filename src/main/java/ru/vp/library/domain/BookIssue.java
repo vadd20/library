@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * Модель представления записи о выдачи книг.
@@ -30,6 +31,9 @@ public class BookIssue {
     LocalDate issueDate;
 
     LocalDate returnDate;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    LocalDate dueDate;
 
     Boolean isOverdue;
 

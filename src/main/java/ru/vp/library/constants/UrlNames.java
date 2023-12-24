@@ -23,4 +23,6 @@ public class UrlNames {
     public static final String INSTANCE_URL = "/instance";
 
     public static final String SHOW_URL = "/show";
+
+    public static final String CHANGE_URL = "/change";
 }
