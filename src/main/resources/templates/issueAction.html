@@ -10,36 +10,22 @@
     <h1 class="text-center mb-4">Выдача книги</h1>
 
     <div class="mb-3">
-        <form action="/book/create" method="get" class="d-grid gap-2">
-            <button type="submit" class="btn btn-primary">Добавить книгу</button>
+        <form action="/issuance/issue" method="get" class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary">Выдать книгу</button>
         </form>
     </div>
 
     <div class="mb-3">
-        <form action="/book/show" method="get" class="d-grid gap-2">
-            <button type="submit" class="btn btn-success">Показать список всех книг</button>
+        <form action="/issuance/changeReturnDate" method="get" class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary">Изменить срок выдачи</button>
         </form>
     </div>
 
     <div class="mb-3">
-        <form action="/book/delete" method="get" class="d-grid gap-2">
-            <button type="submit" class="btn btn-danger">Удалить книгу и ее экземпляры</button>
+        <form action="/issuance/return" method="get" class="d-grid gap-2">
+            <button type="submit" class="btn btn-success">Вернуть книгу</button>
         </form>
     </div>
-
-    <div class="mb-3">
-        <form action="/book/instance/create" method="get" class="d-grid gap-2">
-            <button type="submit" class="btn btn-success">Добавить экземпляр существующей книги</button>
-        </form>
-    </div>
-
-    <div class="mb-3">
-        <form action="/book/instance/delete" method="get" class="d-grid gap-2">
-            <button type="submit" class="btn btn-danger">Удалить экземпляр книги</button>
-        </form>
-    </div>
-
-    <!-- Здесь можно добавить дополнительные формы и кнопки для других действий -->
 
     <div class="mt-4 d-grid gap-2">
         <a href="/" class="btn btn-secondary">Назад</a>

@@ -66,4 +66,8 @@ public class BookInstanceService {
     public Optional<BookInstance> findByIsbn(String isbn) {
         return bookInstanceRepository.findById(isbn);
     }
+
+    public void save(BookInstance bookInstance) {
+        bookInstanceRepository.save(bookInstance);
+    }
 }

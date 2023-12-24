@@ -21,6 +21,9 @@ public class ClientService {
         this.clientRepository = clientRepository;
     }
 
+    public Boolean existsByReaderTicketNumber(String readerTicketNumber) {
+        return clientRepository.existsByReaderTicketNumber(readerTicketNumber);
+    }
     public List<Client> findAllClients() {
         return clientRepository.findAll();
     }

@@ -15,4 +15,5 @@
     <include file="db/V01.00.00.20231224101200__drop_book_is_deleted.sql"/>
     <include file="db/V01.00.00.20231224112500__create_changing_total_number_after_removing_book_instance.sql"/>
     <include file="db/V01.00.00.20231224115900__create_trigger_insert_instance.sql"/>
+    <include file="db/V01.00.00.20231224132300__alter_issue_table.sql"/>
 </databaseChangeLog>
