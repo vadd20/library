@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import ru.vp.library.domain.Book;
 import ru.vp.library.domain.BookInstance;
 import ru.vp.library.repository.BookInstanceRepository;
+import ru.vp.library.repository.BookIssueRepository;
+import ru.vp.library.repository.BookReservationRepository;
 
 /**
  * todo vpodogov
@@ -18,9 +20,15 @@ import ru.vp.library.repository.BookInstanceRepository;
 public class BookInstanceService {
 
     private final BookInstanceRepository bookInstanceRepository;
+    private final BookIssueRepository bookIssueRepository;
+    private final BookReservationRepository bookReservationRepository;
 
-    public BookInstanceService(BookInstanceRepository bookInstanceRepository) {
+    public BookInstanceService(BookInstanceRepository bookInstanceRepository,
+                               BookIssueRepository bookIssueRepository,
+                               BookReservationRepository bookReservationRepository) {
         this.bookInstanceRepository = bookInstanceRepository;
+        this.bookIssueRepository = bookIssueRepository;
+        this.bookReservationRepository = bookReservationRepository;
     }
 
     /**
@@ -51,16 +59,18 @@ public class BookInstanceService {
         return (maxNumber != null) ? maxNumber : 0;
     }
 
-    public List<BookInstance> deleteAllByBookId(String bookId) {
-        return bookInstanceRepository.deleteAllByBookId(bookId);
+    public void deleteAllByBookId(String bookId) {
+        bookInstanceRepository.deleteAllByBookId(bookId);
     }
 
     public boolean existsById(String isbn) {
         return bookInstanceRepository.existsById(isbn);
     }
 
-    public String deleteBookInstanceById(String isbn) {
-        return bookInstanceRepository.deleteBookInstanceById(isbn);
+    public void deleteBookInstanceById(String isbn) {
+        bookIssueRepository.deleteAllByBookInstanceId(isbn);
+        bookReservationRepository.deleteAllByBookInstanceId(isbn);
+        bookInstanceRepository.deleteBookInstanceById(isbn);
     }
 
     public Optional<BookInstance> findByIsbn(String isbn) {

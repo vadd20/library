@@ -43,4 +43,8 @@ public interface BookIssueRepository extends JpaRepository<BookIssue, String> {
             "LEFT JOIN Client c ON c.id = i.clientId " +
             "LEFT JOIN User u ON u.id = i.librarianId")
     List<IssueDTO> findAllBookIssues();
+
+    void deleteAllByClientId(String id);
+
+    void deleteAllByBookInstanceId(String id);
 }

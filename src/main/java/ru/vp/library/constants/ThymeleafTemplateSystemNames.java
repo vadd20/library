@@ -37,4 +37,13 @@ public class ThymeleafTemplateSystemNames {
     public static final String RESERVATION_CHANGE_EXPIRE_DATE_FORM = "reservationChangeExpireDate";
 
     public static final String RESERVATION_LIST_FORM = "reservationList";
+
+    public static final String CLIENT_ACTION_FORM = "clientAction";
+
+    public static final String CLIENT_CREATION_FORM = "clientCreation";
+
+    public static final String CLIENT_LIST_FORM = "clientList";
+
+    public static final String CLIENT_REMOVING_FORM = "clientRemoving";
+
 }

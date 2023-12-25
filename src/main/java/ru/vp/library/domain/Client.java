@@ -1,8 +1,6 @@
 package ru.vp.library.domain;
 
-import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import lombok.Getter;
@@ -36,6 +34,4 @@ public class Client {
     String readerTicketNumber;
 
     LocalDate registrationDate;
-
-    Boolean isActive;
 }

@@ -1,6 +1,5 @@
 package ru.vp.library.repository;
 
-import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -19,9 +18,9 @@ public interface BookInstanceRepository extends JpaRepository<BookInstance, Stri
 
     boolean existsById(String isbn);
 
-    String deleteBookInstanceById(String isbn);
+    void deleteBookInstanceById(String isbn);
 
-    List<BookInstance> deleteAllByBookId(String bookId);
+    void deleteAllByBookId(String bookId);
 
     Optional<BookInstance> findById(String isbn);
 }

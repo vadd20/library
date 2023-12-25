@@ -42,4 +42,8 @@ public interface BookReservationRepository extends JpaRepository<BookReservation
     @Query("update BookReservation r set r.status = 'Недействительно'" +
         " where r.expirationDate < current_date and r.status = 'Активно'")
     void updateExpiredReservationStatus();
+
+    void deleteAllByClientId(String id);
+
+    void deleteAllByBookInstanceId(String id);
 }

@@ -19,4 +19,5 @@
     <include file="db/V01.00.00.20231224210100__alter_book_table_drop_total_number.sql"/>
     <include file="db/V01.00.00.20231224211100__alter_table_book_reservation.sql"/>
     <include file="db/V01.00.00.20231225015200__alter_table_book_reserv_change_status_length.sql"/>
+    <include file="db/V01.00.00.20231225095300__drop_is_active_column.sql"/>
 </databaseChangeLog>
