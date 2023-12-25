@@ -18,6 +18,8 @@ public class UrlNames {
 
     public static final String CLIENT_URL = "/client";
 
+    public static final String ADMIN_URL = "/admin";
+
     public static final String RETURN_URL = "/return";
 
     public static final String CREATE_URL = "/create";

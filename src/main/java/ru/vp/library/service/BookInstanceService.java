@@ -60,6 +60,11 @@ public class BookInstanceService {
     }
 
     public void deleteAllByBookId(String bookId) {
+        bookInstanceRepository.findAllByBookId(bookId).forEach(instance ->
+        {
+            bookIssueRepository.deleteAllByBookInstanceId(instance.getId());
+            bookReservationRepository.deleteAllByBookInstanceId(instance.getId());
+        });
         bookInstanceRepository.deleteAllByBookId(bookId);
     }
 
@@ -80,4 +85,6 @@ public class BookInstanceService {
     public void save(BookInstance bookInstance) {
         bookInstanceRepository.save(bookInstance);
     }
+
+
 }
